@@ -35,7 +35,8 @@ struct ContentView: View {
     @State var s4 = 0
     @State var s5 = 0
     
-    @State var result = 0.0
+    @State var bill = 0.0
+    @State var rest = 0.0
     @State var myresult = ""
     
     var body: some View {
@@ -179,7 +180,7 @@ struct ContentView: View {
                             M1()
                             
                         } label: {
-                            Text("Show The Bill")
+                            Text("Show the bill and the rest")
                                 .font(.custom("Amiri-BoldItalic", size: 30))
                                 .foregroundColor(.white)
                                 .shadow(color: Color(red: 0.995, green: 0.355, blue: 0.122) , radius: 5)
@@ -187,11 +188,19 @@ struct ContentView: View {
                                 .background(.black)
                                 .cornerRadius(15)
                         }
-                        
-                        Text("\(result)")
+                        HStack(spacing: 30){
+                            
+                        Text("The bill: \(bill, specifier: "%.0f")")
                             .font(.custom("Amiri-BoldItalic", size: 35))
                             .foregroundColor(.black)
                             .shadow(color: .gray , radius: 3)
+                        
+                        Text("The rest: \(rest, specifier: "%.0f")")
+                            .font(.custom("Amiri-BoldItalic", size: 35))
+                            .foregroundColor(.black)
+                            .shadow(color: .gray , radius: 3)
+                        
+                        }
                         
                         Spacer()
                         
@@ -207,17 +216,19 @@ struct ContentView: View {
         }
     }
     func M1(){
-        result = (p1 * Double(s1) ?? 0.0) + (p2 * Double(s2) ?? 0.0) + (p3 *  Double(s3) ?? 0.0) + (p4 *  Double(s4) ?? 0.0) + (p5 *  Double(s5) ?? 0.0)
+        bill = (p1 * Double(s1) ?? 0.0) + (p2 * Double(s2) ?? 0.0) + (p3 *  Double(s3) ?? 0.0) + (p4 *  Double(s4) ?? 0.0) + (p5 *  Double(s5) ?? 0.0)
+        
+        rest = ((Double(urm) ?? 0 ) - bill)
         
         if urm.isEmpty
         {
             myresult = "Enter the amount"
         }
-        else if result >= Double(urm) ?? 0.0
+        else if bill > (Double(urm) ?? 0.0)
         {
             myresult = "The amount is not enough"
         }
-        else if result <= Double(urm) ?? 0.0
+        else if bill <= (Double(urm) ?? 0.0)
         {
             myresult = "operation accomplished successfully"
         }
@@ -225,6 +236,7 @@ struct ContentView: View {
         {
             myresult = "Enter the amount"
         }
+        
     }
 }
 
