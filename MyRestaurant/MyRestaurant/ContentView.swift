@@ -144,7 +144,7 @@ struct ContentView: View {
                         HStack{
                             Text("Ice Cream")
                             
-                            Stepper( "     2.00 kd", value: $s5, in: 0...100)
+                            Stepper( "     1.00 kd", value: $s5, in: 0...100)
                             
                             Text("\(s5)")
                             
@@ -172,28 +172,58 @@ struct ContentView: View {
                                 .frame(width: 100, height: 50)
                                 .textFieldStyle(.roundedBorder)
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .keyboardType(.numberPad)
                         }
                         
                         Button {
-                            result = (p1 * Double(s1) ?? 0.0) + (p2 * Double(s2) ?? 0.0) + (p3 *  Double(s3) ?? 0.0) + (p4 *  Double(s4) ?? 0.0) + (p5 *  Double(s5) ?? 0.0)
+                            M1()
                             
                         } label: {
                             Text("Show The Bill")
                                 .font(.custom("Amiri-BoldItalic", size: 30))
-                                .foregroundColor(.black)
-                                .shadow(color: .gray , radius: 5)
-                                .background(  AngularGradient(colors: [ .green, .blue, .purple,.yellow],center: .center,startAngle: .degrees(90),endAngle: .degrees(360))
-                                    .frame(width: 200, height: 75)
-                                    .clipShape(RoundedRectangle(cornerRadius: 25)))
+                                .foregroundColor(.white)
+                                .shadow(color: Color(red: 0.995, green: 0.355, blue: 0.122) , radius: 5)
+                                .padding()
+                                .background(.black)
+                                .cornerRadius(15)
                         }
                         
                         Text("\(result)")
+                            .font(.custom("Amiri-BoldItalic", size: 35))
+                            .foregroundColor(.black)
+                            .shadow(color: .gray , radius: 3)
                         
+                        Spacer()
                         
+                        Text(myresult)
+                            .font(.custom("Amiri-BoldItalic", size: 25))
+                            .foregroundColor(.black)
+                            .shadow(color: .gray , radius: 3)
+                        Spacer()
                     }
                     }
                 }
             } .padding()
+        }
+    }
+    func M1(){
+        result = (p1 * Double(s1) ?? 0.0) + (p2 * Double(s2) ?? 0.0) + (p3 *  Double(s3) ?? 0.0) + (p4 *  Double(s4) ?? 0.0) + (p5 *  Double(s5) ?? 0.0)
+        
+        if urm.isEmpty
+        {
+            myresult = "Enter the amount"
+        }
+        else if result >= Double(urm) ?? 0.0
+        {
+            myresult = "The amount is not enough"
+        }
+        else if result <= Double(urm) ?? 0.0
+        {
+            myresult = "operation accomplished successfully"
+        }
+        else
+        {
+            myresult = "Enter the amount"
         }
     }
 }
