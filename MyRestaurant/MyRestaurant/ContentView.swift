@@ -190,13 +190,13 @@ struct ContentView: View {
                         }
                         HStack(spacing: 30){
                             
-                        Text("The bill: \(bill, specifier: "%.0f")")
-                            .font(.custom("Amiri-BoldItalic", size: 35))
+                        Text("The bill: \(bill, specifier: "%.3f")")
+                            .font(.custom("Amiri-BoldItalic", size: 30))
                             .foregroundColor(.black)
                             .shadow(color: .gray , radius: 3)
                         
-                        Text("The rest: \(rest, specifier: "%.0f")")
-                            .font(.custom("Amiri-BoldItalic", size: 35))
+                        Text("The rest: \(rest, specifier: "%.3f")")
+                            .font(.custom("Amiri-BoldItalic", size: 30))
                             .foregroundColor(.black)
                             .shadow(color: .gray , radius: 3)
                         
